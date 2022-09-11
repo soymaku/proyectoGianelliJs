@@ -9,7 +9,7 @@ const productos = [
   {id: 8, nombre: 'Cadena Shadow Interlock Supreme', desc: 'Shadow siempre tuvo la meta de crear la mejor cadena para BMX. Esta cadena es increiblemente fuerte, tanto para sufrir tensiones como grinds. Fue hecha con un material especial para tener mayor resistencia a los daños. La cadena mas unica y fuerte jamás hecha para BMX.',  precio: 60, img: 'shadowChain.jpg'},
   {id: 9, nombre: 'Plato Shadow Sabotage', desc: 'Este plato fue basado en platos Old School, con nuevas tecnologias y materiales. Resistentes a los fuertes impactos',  precio: 38, img: 'shadowSprocket.jpg'},
 ];
-const contenedor = document.querySelector('.main__content')
+const contenedor = document.querySelector('.main__content');
 const aumentarPrecios = productos.map(producto=>{
   return {
   id: producto.id, 
@@ -18,7 +18,7 @@ const aumentarPrecios = productos.map(producto=>{
   precio: producto.precio * 1.05, 
   img: producto.img
 }
-})
+});
 
 for (const producto of aumentarPrecios) {
   let div = document.createElement('div')
@@ -27,8 +27,8 @@ for (const producto of aumentarPrecios) {
   <h3 class='productos__title'>${producto.nombre}</h3>
   <p class='productos__desc'>${producto.desc}</h3>
   <p class='productos__precio'>$ ${producto.precio}</p>
-  <a>Comprar</a>
+  <a href='#'>Comprar</a>
   </div>`;
   contenedor.append(div)
-}
+};
 
