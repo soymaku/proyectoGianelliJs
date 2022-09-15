@@ -121,7 +121,7 @@ body {
   margin: 5px;
   font-weight: bold;;
 }
-.productos a{
+.productos__comprar{
   background-color: #ccc;
   margin: 5px;
   border: 1px solid black;
@@ -132,7 +132,7 @@ body {
   transition: all 0.2s
 }
 
-.productos a:hover{
+.productos__comprar:hover{
   color: white;
   background-color:rgb(80, 80, 80)
 }

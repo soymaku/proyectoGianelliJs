@@ -10,6 +10,8 @@ const productos = [
   {id: 9, nombre: 'Plato Shadow Sabotage', desc: 'Este plato fue basado en platos Old School, con nuevas tecnologias y materiales. Resistentes a los fuertes impactos',  precio: 38, img: 'shadowSprocket.jpg'},
 ];
 const contenedor = document.querySelector('.main__content');
+const carrito = document.querySelector('.carrito')
+//Aumento el precio de mis productos
 const aumentarPrecios = productos.map(producto=>{
   return {
   id: producto.id, 
@@ -20,6 +22,7 @@ const aumentarPrecios = productos.map(producto=>{
 }
 });
 
+//Creo las cards de mis productos
 for (const producto of aumentarPrecios) {
   let div = document.createElement('div')
   div.innerHTML = `<div class='productos'>
@@ -27,8 +30,7 @@ for (const producto of aumentarPrecios) {
   <h3 class='productos__title'>${producto.nombre}</h3>
   <p class='productos__desc'>${producto.desc}</h3>
   <p class='productos__precio'>$ ${producto.precio}</p>
-  <a href='#'>Comprar</a>
+  <button class='productos__comprar' id='btn-agregar${producto.id}'>Comprar</button>
   </div>`;
   contenedor.append(div)
 };
-
