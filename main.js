@@ -10,9 +10,11 @@ const productos = [
   {id: 9, nombre: 'Plato Shadow Sabotage', desc: 'Este plato fue basado en platos Old School, con nuevas tecnologias y materiales. Resistentes a los fuertes impactos',  precio: 38, img: 'shadowSprocket.jpg'},
 ];
 const contenedor = document.querySelector('.main__content');
-const carrito = document.querySelector('.carrito')
+const carritoDiv = document.querySelector('.carrito')
+let carrito = [];
+
 //Aumento el precio de mis productos
-const aumentarPrecios = productos.map(producto=>{
+/*const aumentarPrecios = productos.map(producto=>{
   return {
   id: producto.id, 
   nombre: producto.nombre, 
@@ -20,17 +22,68 @@ const aumentarPrecios = productos.map(producto=>{
   precio: producto.precio * 1.05, 
   img: producto.img
 }
-});
+});*/
 
 //Creo las cards de mis productos
-for (const producto of aumentarPrecios) {
+for (const producto of productos) {
   let div = document.createElement('div')
   div.innerHTML = `<div class='productos'>
   <img src="./assets/${producto.img}" alt="">
   <h3 class='productos__title'>${producto.nombre}</h3>
   <p class='productos__desc'>${producto.desc}</h3>
   <p class='productos__precio'>$ ${producto.precio}</p>
-  <button class='productos__comprar' id='btn-agregar${producto.id}'>Comprar</button>
+  <button class='productos__comprar' id='btn-agregar${producto.id}'>Agregar al carrito</button>
   </div>`;
   contenedor.append(div)
 };
+
+//Le doy utilidad al boton "comprar"
+function agregarFuncionAlBoton(){
+  productos.forEach(producto=>{
+    document.querySelector(`#btn-agregar${producto.id}`).addEventListener('click',()=>{
+      agregarAlCarrito(producto);
+    })
+  })
+}
+
+agregarFuncionAlBoton();
+
+//Hago funcionar mi carrito
+function agregarAlCarrito(producto){
+  let existe = carrito.some(prod=>prod.id === producto.id)
+  if(existe === false){
+    producto.cantidad = 1;
+    carrito.push(producto)
+  }
+  else{
+    let prodFind = carrito.find(prod=> prod.id === producto.id);
+    prodFind.cantidad++;
+  }
+  console.log(carrito);
+  renderizarCarrito();
+}
+
+//Le doy forma al carrito en el HTML
+function renderizarCarrito(){
+  carritoDiv.innerHTML= '';
+  carrito.forEach(producto=>{
+    carritoDiv.innerHTML +=`<div class='carritoProd'>
+    <h4 class='carritoProd__title'>${producto.nombre}</h3>
+    <p>Cantidad: ${producto.cantidad}</p>
+    <p class='carritoProd__price'>$${producto.precio * producto.cantidad}</p>
+    <button class='productos__comprar' id='btn-borrar${producto.id}'>X</button>
+    </div>`;
+  })
+  borrarProducto()
+}
+
+//Le doy utilidad al boton "borrar"
+function borrarProducto(){
+  carrito.forEach(producto=>{
+    document.querySelector(`#btn-borrar${producto.id}`).addEventListener('click',()=>{
+    let indice = carrito.findIndex(e=>e.id===producto.id)
+    carrito.splice(indice,1)
+    renderizarCarrito()
+    })
+  })
+}

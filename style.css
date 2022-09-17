@@ -15,8 +15,13 @@ li {
 }
 
 body {
+  display: grid;
   background-image: url(./assets/backgroundImage.jpeg);
   background-attachment: fixed;
+  grid-template-areas: 
+  'header header header'
+  'aside main main'
+  'footer footer footer';
 }
 
 .header {
@@ -26,6 +31,7 @@ body {
   border-bottom: 3px solid black;
   border-left: 3px solid black;
   border-right: 3px solid black;
+  grid-area: header;
 }
 
 .header__content {
@@ -64,11 +70,12 @@ body {
 
 .main {
   background-color: #555;
-  margin: 1px 200px;
+  margin: 1px 200px 0 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   border: 3px solid black;
+  grid-area: main;
 }
 
 .main__content {
@@ -129,7 +136,8 @@ body {
   padding: 2px;
   font-weight: bold;
   align-self: center;
-  transition: all 0.2s
+  transition: all 0.2s;
+  cursor: pointer
 }
 
 .productos__comprar:hover{
@@ -141,6 +149,35 @@ body {
   justify-self: flex-end;
 }
 
+.aside {
+  display: inline-block;
+  background-color:#555;
+  width: 300px;
+  height: min-content
+}
+
+.aside h2 {
+  color: #eee;
+  text-align: center;
+}
+
+.carrito {
+  display: flex;
+  flex-direction: column;
+}
+
+.carritoProd {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+
+}
+
+.carritoProd__title {
+  font-weight: bold;
+  color: #ddd;
+}
+
 .footer {
   display: block;
   margin: 0 200px;
@@ -148,6 +185,7 @@ body {
   border-top: 3px solid black;
   border-left: 3px solid black;
   border-right: 3px solid black;
+  grid-area: footer;
 }
 
 .footer__info {
@@ -158,3 +196,4 @@ body {
   align-items: center;
   padding: 30px;
 }
+
