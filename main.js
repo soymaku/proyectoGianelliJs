@@ -1,7 +1,7 @@
 const productos = [
   {id: 1, nombre: 'Cuadro Subrosa MR1', desc: 'Cuadro Subrosa signature Matt Ray V1, Full CrMo 4130, apto para cubiertas 2.40, caja MID',  precio: 300, img: 'subrosaMr1.jpg'},
   {id: 2, nombre: 'Horquilla Shadow Captive V2', desc: 'Horquilla Shadow Captive V2, con adaptadores para intercambiar entre 26mm y 32mm de Offset. Full CrMo 4130. Solo compatible con ejes hembra.',  precio: 170, img: 'shadowCaptiveV2.jpg'},
-  {id: 3, nombre: 'Manubrio Ray bars', desc: 'Manubrio Subrosa signature Matt Ray, disponible en 8.75" y 9.3". Full CrMo 4130.' ,  precio: 110, img: 'subrosaRayBars.jpg'},
+  {id: 3, nombre: 'Manubrio Subrosa Ray Bars', desc: 'Manubrio Subrosa signature Matt Ray, disponible en 8.75" y 9.3". Full CrMo 4130.' ,  precio: 110, img: 'subrosaRayBars.jpg'},
   {id: 4, nombre: 'Llantas Shadow', desc: 'Par de llantas, con aros Shadow Truss y mazas Shadow Symbol.',  precio: 290, img: 'shadowWheel.jpg'},
   {id: 5, nombre: 'Stem Shadow VVS', desc: 'El Stem Shadow VVS es un stem front load de la Signature de Matt Ray.',  precio: 60, img: 'shadowStem.jpg'},
   {id: 6, nombre: 'Asiento Subrosa Matt Ray', desc: 'Un asiento hecho especialmente para los fans de Matt Ray que disfrutan un estilo fino.',  precio: 65, img: 'subrosaMrSeat.jpg'},
@@ -11,10 +11,12 @@ const productos = [
 ];
 const contenedor = document.querySelector('.main__content');
 const carritoDiv = document.querySelector('.carrito')
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
 
 //Aumento el precio de mis productos
-/*const aumentarPrecios = productos.map(producto=>{
+/*
+const aumentarPrecios = productos.map(producto=>{
   return {
   id: producto.id, 
   nombre: producto.nombre, 
@@ -22,7 +24,8 @@ let carrito = [];
   precio: producto.precio * 1.05, 
   img: producto.img
 }
-});*/
+});
+*/
 
 //Creo las cards de mis productos
 for (const producto of productos) {
@@ -67,13 +70,14 @@ function agregarAlCarrito(producto){
 function renderizarCarrito(){
   carritoDiv.innerHTML= '';
   carrito.forEach(producto=>{
-    carritoDiv.innerHTML +=`<div class='carritoProd'>
-    <h4 class='carritoProd__title'>${producto.nombre}</h3>
-    <p>Cantidad: ${producto.cantidad}</p>
-    <p class='carritoProd__price'>$${producto.precio * producto.cantidad}</p>
-    <button class='productos__comprar' id='btn-borrar${producto.id}'>X</button>
+    carritoDiv.innerHTML +=`<div class='carrito__producto'>
+    <h4 class='carrito__producto-title'>${producto.nombre}</h3>
+    <p class='carrito__producto-cant'>Cantidad: ${producto.cantidad}</p>
+    <p class='carrito__producto-price'>$${producto.precio * producto.cantidad}</p>
+    <button class='carrito__producto-btn' id='btn-borrar${producto.id}'>X</button>
     </div>`;
   })
+  localStorage.setItem('carrito',JSON.stringify(carrito))
   borrarProducto()
 }
 
@@ -87,3 +91,5 @@ function borrarProducto(){
     })
   })
 }
+
+renderizarCarrito();

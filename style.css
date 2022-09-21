@@ -1,3 +1,5 @@
+/* GLOBAL */
+
 * {
   margin: 0;
   padding: 0;
@@ -20,12 +22,14 @@ body {
   background-attachment: fixed;
   grid-template-areas: 
   'header header header'
-  'aside main main'
+  'main main aside'
   'footer footer footer';
 }
 
+/* HEADER */
+
 .header {
-  margin: 0 200px;
+  margin: 0 2px 0 2px;
   display: block;
   background-color: #555;
   border-bottom: 3px solid black;
@@ -68,9 +72,11 @@ body {
   color: white;
 }
 
+/* MAIN */
+
 .main {
   background-color: #555;
-  margin: 1px 200px 0 0;
+  margin: 2px 2px 0 2px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -88,6 +94,8 @@ body {
   height: 100%;
   }
   
+/* PRODUCTOS */
+
 .productos {
   background-color: #ccc;
   display: flex;
@@ -105,6 +113,7 @@ body {
   background-color: rgb(177, 74, 74);
   color: white;
 }
+
 .productos img {
   width: 350px;
   height: 350px;
@@ -126,7 +135,7 @@ body {
 
 .productos__precio{
   margin: 5px;
-  font-weight: bold;;
+  font-weight: bold;
 }
 .productos__comprar{
   background-color: #ccc;
@@ -149,38 +158,56 @@ body {
   justify-self: flex-end;
 }
 
+/* CARRITO DE COMPRAS */
+
 .aside {
   display: inline-block;
   background-color:#555;
   width: 300px;
-  height: min-content
+  height: min-content;
+  margin: 2px 2px 0 0;
+  border: 3px solid black;
 }
 
-.aside h2 {
+.aside__title {
   color: #eee;
   text-align: center;
 }
 
-.carrito {
+.carrito__producto {
+  padding: 5px;
   display: flex;
   flex-direction: column;
-}
-
-.carritoProd {
-  display: flex;
-  justify-content: space-between;
+  background-color: #ccc;
   border: 1px solid black;
-
+  transition: all 0.2s
+}
+.carrito__producto:hover{
+  background-color: #bbb
 }
 
-.carritoProd__title {
+.carrito__producto-btn {
+  width: 30px;
+  border: 1px solid black;
+  border-radius: 3px;
+  align-self: center;
+  background-color: #aaa;
+  /* color:rgb(80, 80, 80); */
+  color:rgb(177, 74, 74);
+  cursor: pointer;
   font-weight: bold;
+  transition: all 0.2s;
+}
+.carrito__producto-btn:hover{
+  background-color:rgb(177, 74, 74);
   color: #ddd;
 }
 
+/* FOOTER */
+
 .footer {
   display: block;
-  margin: 0 200px;
+  margin: 2px 2px 0 2px;
   background-color: #555;
   border-top: 3px solid black;
   border-left: 3px solid black;
@@ -196,4 +223,3 @@ body {
   align-items: center;
   padding: 30px;
 }
-
