@@ -172,14 +172,40 @@ body {
 .aside__title {
   color: #eee;
   text-align: center;
+  border-bottom: 1px solid black;
 }
+
+.aside__comprar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border-top: 1px solid black;
+}
+
+.aside__comprar-btn {
+  background-color: #aaa;
+  border: 1px solid black;;
+  padding: 4px;
+  border-radius: 4px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.aside__comprar-btn:hover {
+  background-color:rgb(67, 194, 28);
+}
+
 
 .carrito__producto {
   padding: 5px;
   display: flex;
   flex-direction: column;
   background-color: #ccc;
-  border: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   transition: all 0.2s
 }
 .carrito__producto:hover{

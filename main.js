@@ -11,21 +11,23 @@ const productos = [
 ];
 const contenedor = document.querySelector('.main__content');
 const carritoDiv = document.querySelector('.carrito')
+const precioTotal = document.querySelector('#carritoPrecioTotal')
+const btnComprar = document.querySelector('.aside__comprar-btn')
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+//Le doy funcion al boton "comprar"
 
 
 //Aumento el precio de mis productos
-/*
-const aumentarPrecios = productos.map(producto=>{
+/*const aumentarPrecios = productos.map(producto=>{
   return {
   id: producto.id, 
   nombre: producto.nombre, 
   desc: producto.desc, 
   precio: producto.precio * 1.05, 
   img: producto.img
-}
-});
-*/
+  }
+});*/
 
 //Creo las cards de mis productos
 for (const producto of productos) {
@@ -40,7 +42,7 @@ for (const producto of productos) {
   contenedor.append(div)
 };
 
-//Le doy utilidad al boton "comprar"
+//Le doy utilidad al boton "agregar al carrito"
 function agregarFuncionAlBoton(){
   productos.forEach(producto=>{
     document.querySelector(`#btn-agregar${producto.id}`).addEventListener('click',()=>{
@@ -50,6 +52,8 @@ function agregarFuncionAlBoton(){
 }
 
 agregarFuncionAlBoton();
+
+
 
 //Hago funcionar mi carrito
 function agregarAlCarrito(producto){
@@ -71,7 +75,7 @@ function renderizarCarrito(){
   carritoDiv.innerHTML= '';
   carrito.forEach(producto=>{
     carritoDiv.innerHTML +=`<div class='carrito__producto'>
-    <h4 class='carrito__producto-title'>${producto.nombre}</h3>
+    <h3 class='carrito__producto-title'>${producto.nombre}</h3>
     <p class='carrito__producto-cant'>Cantidad: ${producto.cantidad}</p>
     <p class='carrito__producto-price'>$${producto.precio * producto.cantidad}</p>
     <button class='carrito__producto-btn' id='btn-borrar${producto.id}'>X</button>
@@ -79,6 +83,7 @@ function renderizarCarrito(){
   })
   localStorage.setItem('carrito',JSON.stringify(carrito))
   borrarProducto()
+  precioTotal.innerText = carrito.reduce((acc, prod )=> acc + prod.precio * prod.cantidad, 0)
 }
 
 //Le doy utilidad al boton "borrar"
@@ -92,4 +97,11 @@ function borrarProducto(){
   })
 }
 
-renderizarCarrito();
+btnComprar.addEventListener('click', ()=>{
+  alert('Gracias por comprar. ¡En los proximos 5 días hábiles estará llegando tu pedido!')
+  carrito.lenght = 0;
+  renderizarCarrito();
+})
+
+
+renderizarCarrito();  
