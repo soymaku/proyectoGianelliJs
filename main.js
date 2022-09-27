@@ -1,5 +1,3 @@
-const { default: Swal } = require('sweetalert2');
-
 const productos = [
   {id: 1, nombre: 'Cuadro Subrosa MR1', desc: 'Cuadro Subrosa signature Matt Ray V1, Full CrMo 4130, apto para cubiertas 2.40, caja MID',  precio: 300, img: 'subrosaMr1.jpg'},
   {id: 2, nombre: 'Horquilla Shadow Captive V2', desc: 'Horquilla Shadow Captive V2, con adaptadores para intercambiar entre 26mm y 32mm de Offset. Full CrMo 4130. Solo compatible con ejes hembra.',  precio: 170, img: 'shadowCaptiveV2.jpg'},
@@ -132,15 +130,5 @@ renderizarCarrito();
 comprarProductos();
 
 function revisarCarrito(){
-  if (carrito.length != 0){
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Has agregado un producto al carrito',
-      showConfirmButton: false,
-      timer: 1500
-    })
-  }
+  carrito.length != 0 && Swal.fire({position: 'top-end', icon: 'success',title: 'Has agregado un producto al carrito',showConfirmButton: false,timer: 1500})
 }
-
-carrito.length != 0? Swal.fire({position: 'top-end', icon: 'success', title: 'Has agregado un producto al carrito', showConfirmButton: false, timer: 1500})
