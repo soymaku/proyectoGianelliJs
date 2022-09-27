@@ -1,3 +1,5 @@
+const { default: Swal } = require('sweetalert2');
+
 const productos = [
   {id: 1, nombre: 'Cuadro Subrosa MR1', desc: 'Cuadro Subrosa signature Matt Ray V1, Full CrMo 4130, apto para cubiertas 2.40, caja MID',  precio: 300, img: 'subrosaMr1.jpg'},
   {id: 2, nombre: 'Horquilla Shadow Captive V2', desc: 'Horquilla Shadow Captive V2, con adaptadores para intercambiar entre 26mm y 32mm de Offset. Full CrMo 4130. Solo compatible con ejes hembra.',  precio: 170, img: 'shadowCaptiveV2.jpg'},
@@ -15,7 +17,6 @@ const precioTotal = document.querySelector('#carritoPrecioTotal')
 const btnComprar = document.querySelector('.aside__comprar-btn')
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-//Le doy funcion al boton "comprar"
 
 
 //Aumento el precio de mis productos
@@ -53,8 +54,6 @@ function agregarFuncionAlBoton(){
 
 agregarFuncionAlBoton();
 
-
-
 //Hago funcionar mi carrito
 function agregarAlCarrito(producto){
   let existe = carrito.some(prod=>prod.id === producto.id)
@@ -66,13 +65,14 @@ function agregarAlCarrito(producto){
     let prodFind = carrito.find(prod=> prod.id === producto.id);
     prodFind.cantidad++;
   }
-  console.log(carrito);
   renderizarCarrito();
+  revisarCarrito()
 }
+
 
 //Le doy forma al carrito en el HTML
 function renderizarCarrito(){
-  carritoDiv.innerHTML= '';
+  carritoDiv.innerHTML = '';
   carrito.forEach(producto=>{
     carritoDiv.innerHTML +=`<div class='carrito__producto'>
     <h3 class='carrito__producto-title'>${producto.nombre}</h3>
@@ -97,11 +97,50 @@ function borrarProducto(){
   })
 }
 
+//Le doy funcion al boton "comprar"
+function comprarProductos(){
 btnComprar.addEventListener('click', ()=>{
-  alert('Gracias por comprar. ¡En los proximos 5 días hábiles estará llegando tu pedido!')
-  carrito.lenght = 0;
+  if (carrito.length === 0){
+    Swal.fire(
+      'Error',
+      'Debes agregar al menos 1 producto al carrito.',
+      'error'
+    )
+  }else{
+  Swal.fire({
+    title: 'Completa los siguientes datos para continuar con la compra:',
+    html:
+      '<input id="swal-input1" class="swal2-input" placeholder="Número de tarjeta" type="text" maxLength="16">' +
+      '<input id="swal-input2" class="swal2-input" placeholder="Código de seguridad" type="text" maxLength="3">' +
+      '<input id="swal-input3" class="swal2-input" placeholder="Fecha de vto. XX/XX" type="text" maxLength="5">',
+    focusConfirm: false,
+    preConfirm: () => {
+          Swal.fire(
+            '¡Listo!',
+            'Has realizado la compra. En los proximos 5 dias habiles recibiras tu pedido.',
+            'success'
+          )
+    }
+  })
+  carrito = [];
   renderizarCarrito();
+}
 })
-
+}
 
 renderizarCarrito();  
+comprarProductos();
+
+function revisarCarrito(){
+  if (carrito.length != 0){
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Has agregado un producto al carrito',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+}
+
+carrito.length != 0? Swal.fire({position: 'top-end', icon: 'success', title: 'Has agregado un producto al carrito', showConfirmButton: false, timer: 1500})
