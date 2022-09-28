@@ -15,8 +15,6 @@ const precioTotal = document.querySelector('#carritoPrecioTotal')
 const btnComprar = document.querySelector('.aside__comprar-btn')
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-
-
 //Aumento el precio de mis productos
 /*const aumentarPrecios = productos.map(producto=>{
   return {
@@ -66,7 +64,6 @@ function agregarAlCarrito(producto){
   renderizarCarrito();
   revisarCarrito()
 }
-
 
 //Le doy forma al carrito en el HTML
 function renderizarCarrito(){
@@ -129,6 +126,7 @@ btnComprar.addEventListener('click', ()=>{
 renderizarCarrito();  
 comprarProductos();
 
+//Alerta al agregar un producto al carrito
 function revisarCarrito(){
-  carrito.length != 0 && Swal.fire({position: 'top-end', icon: 'success',title: 'Has agregado un producto al carrito',showConfirmButton: false,timer: 1500})
+  carrito.length != 0 && Swal.fire({position: 'top-end', icon: 'success',title: 'Has agregado un producto al carrito',showConfirmButton: false,timer: 1500, toast: true} )
 }
