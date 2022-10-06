@@ -40,7 +40,7 @@ body {
 
 .header__content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 10px;
 }
@@ -48,6 +48,8 @@ body {
 .header__content-title a{
   color: #ddd;
   font-weight: bold;
+  font-size: 50px;
+  margin: 10px;
 }
 
 .header__content-navbar li{
@@ -144,7 +146,7 @@ body {
   margin: 5px;
   border: 1px solid black;
   border-radius: 5px;
-  padding: 2px;
+  padding: 5px;
   font-weight: bold;
   align-self: center;
   transition: all 0.2s;

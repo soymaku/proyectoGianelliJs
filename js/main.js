@@ -1,4 +1,4 @@
-const productos = [
+/*const productos = [
   {id: 1, nombre: 'Cuadro Subrosa MR1', desc: 'Cuadro Subrosa signature Matt Ray V1, Full CrMo 4130, apto para cubiertas 2.40, caja MID',  precio: 300, img: 'subrosaMr1.jpg'},
   {id: 2, nombre: 'Horquilla Shadow Captive V2', desc: 'Horquilla Shadow Captive V2, con adaptadores para intercambiar entre 26mm y 32mm de Offset. Full CrMo 4130. Solo compatible con ejes hembra.',  precio: 170, img: 'shadowCaptiveV2.jpg'},
   {id: 3, nombre: 'Manubrio Subrosa Ray Bars', desc: 'Manubrio Subrosa signature Matt Ray, disponible en 8.75" y 9.3". Full CrMo 4130.' ,  precio: 110, img: 'subrosaRayBars.jpg'},
@@ -8,7 +8,7 @@ const productos = [
   {id: 7, nombre: 'Palancas Shadow Finest', desc: 'Estas palancas, fuertes y finas, fueron construidas especialmente para mantener tus pies centrados y obtener mucho más control. Son compatibles con RHD Y LHD. Su estructura es ideal para realizar crank slides',  precio: 200, img: 'shadowFinestCranks.jpg'},
   {id: 8, nombre: 'Cadena Shadow Interlock Supreme', desc: 'Shadow siempre tuvo la meta de crear la mejor cadena para BMX. Esta cadena es increiblemente fuerte, tanto para sufrir tensiones como grinds. Fue hecha con un material especial para tener mayor resistencia a los daños. La cadena mas unica y fuerte jamás hecha para BMX.',  precio: 60, img: 'shadowChain.jpg'},
   {id: 9, nombre: 'Plato Shadow Sabotage', desc: 'Este plato fue basado en platos Old School, con nuevas tecnologias y materiales. Resistentes a los fuertes impactos',  precio: 38, img: 'shadowSprocket.jpg'},
-];
+];*/
 const contenedor = document.querySelector('.main__content');
 const carritoDiv = document.querySelector('.carrito')
 const precioTotal = document.querySelector('#carritoPrecioTotal')
@@ -27,7 +27,8 @@ let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 });*/
 
 //Creo las cards de mis productos
-for (const producto of productos) {
+function crearProducto(arr){
+for (const producto of arr) {
   let div = document.createElement('div')
   div.innerHTML = `<div class='productos'>
   <img src="./assets/${producto.img}" alt="">
@@ -37,18 +38,19 @@ for (const producto of productos) {
   <button class='productos__comprar' id='btn-agregar${producto.id}'>Agregar al carrito</button>
   </div>`;
   contenedor.append(div)
-};
+}
+}
 
 //Le doy utilidad al boton "agregar al carrito"
-function agregarFuncionAlBoton(){
-  productos.forEach(producto=>{
+function agregarFuncionAlBoton(arr){
+  arr.forEach(producto=>{
     document.querySelector(`#btn-agregar${producto.id}`).addEventListener('click',()=>{
       agregarAlCarrito(producto);
     })
   })
 }
 
-agregarFuncionAlBoton();
+
 
 //Hago funcionar mi carrito
 function agregarAlCarrito(producto){
@@ -128,5 +130,17 @@ comprarProductos();
 
 //Alerta al agregar un producto al carrito
 function revisarCarrito(){
-  carrito.length != 0 && Swal.fire({position: 'top-end', icon: 'success',title: 'Has agregado un producto al carrito',showConfirmButton: false,timer: 1500, toast: true} )
+  carrito.length != 0 && Swal.fire({position: 'top-end', icon: 'success',title: 'Has agregado un producto al carrito',showConfirmButton: false,timer: 1500, toast: true})
 }
+
+//Fetch
+function productos(){
+fetch('./js/data.json')
+.then(res=> res.json())
+.then(data=>{
+  crearProducto(data);
+  agregarFuncionAlBoton(data);
+})
+}
+
+productos()
