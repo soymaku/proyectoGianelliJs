@@ -13,6 +13,12 @@ const contenedor = document.querySelector('.main__content');
 const carritoDiv = document.querySelector('.carrito')
 const precioTotal = document.querySelector('#carritoPrecioTotal')
 const btnComprar = document.querySelector('.aside__comprar-btn')
+const btnRealizarCompra = document.querySelector('#btn__realizarCompra')
+const formTarjeta = document.querySelector('#form')
+const inputNombre = document.getElementById('tarjeta__nombre')
+const inputNumero = document.getElementById('tarjeta__numero')
+const inputEmail = document.getElementById('tarjeta__mail')
+const inputCvv = document.getElementById('tarjeta__cvv')
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
 //Aumento el precio de mis productos
@@ -49,8 +55,6 @@ function agregarFuncionAlBoton(arr){
     })
   })
 }
-
-
 
 //Hago funcionar mi carrito
 function agregarAlCarrito(producto){
@@ -96,33 +100,21 @@ function borrarProducto(){
 
 //Le doy funcion al boton "comprar"
 function comprarProductos(){
-btnComprar.addEventListener('click', ()=>{
-  if (carrito.length === 0){
-    Swal.fire(
-      'Error',
-      'Debes agregar al menos 1 producto al carrito.',
-      'error'
-    )
-  }else{
-  Swal.fire({
-    title: 'Completa los siguientes datos para continuar con la compra:',
-    html:
-      '<input id="swal-input1" class="swal2-input" placeholder="Número de tarjeta" type="text" maxLength="16">' +
-      '<input id="swal-input2" class="swal2-input" placeholder="Código de seguridad" type="text" maxLength="3">' +
-      '<input id="swal-input3" class="swal2-input" placeholder="Fecha de vto. XX/XX" type="text" maxLength="5">',
-    focusConfirm: false,
-    preConfirm: () => {
-          Swal.fire(
-            '¡Listo!',
-            'Has realizado la compra. En los proximos 5 dias habiles recibiras tu pedido.',
-            'success'
-          )
+  formTarjeta.style.display = 'none';
+  btnComprar.addEventListener('click', ()=>{
+    if (carrito.length === 0){
+      Swal.fire(
+        'Error',
+        'Debes agregar al menos 1 producto al carrito.',
+        'error'
+      )
+    }else{
+      formTarjeta.style.display = ''; 
+
+      carrito = [];
+      renderizarCarrito();
     }
   })
-  carrito = [];
-  renderizarCarrito();
-}
-})
 }
 
 renderizarCarrito();  
@@ -133,14 +125,54 @@ function revisarCarrito(){
   carrito.length != 0 && Swal.fire({position: 'top-end', icon: 'success',title: 'Has agregado un producto al carrito',showConfirmButton: false,timer: 1500, toast: true})
 }
 
-//Fetch
+//Funcion al boton "Realizar Compra"
+function finalizarCompra(){
+  btnRealizarCompra.addEventListener('click', ()=>{
+    if (inputNombre.value.length == 0){
+      Swal.fire(
+        '¡Error!',
+        'No puedes dejar campos vacios.',
+        'error'
+      ) 
+    }else if(inputEmail.value.length == 0){
+      Swal.fire(
+        '¡Error!',
+        'No puedes dejar campos vacios.',
+        'error'
+      ) 
+    }else if(inputNumero.value.length == 0){
+      Swal.fire(
+        '¡Error!',
+        'No puedes dejar campos vacios.',
+        'error'
+      ) 
+    }else if(inputCvv.value.length == 0){
+      Swal.fire(
+        '¡Error!',
+        'No puedes dejar campos vacios.',
+        'error'
+      ) 
+    }
+    else{
+      Swal.fire(
+        '¡Listo!',
+        'Has realizado la compra. En los proximos 5 dias habiles recibiras tu pedido.',
+        'success'
+      )
+      formTarjeta.style.display='none';
+    }
+  })
+}
+
+//Fetch productos
 function productos(){
-fetch('./js/data.json')
-.then(res=> res.json())
-.then(data=>{
-  crearProducto(data);
-  agregarFuncionAlBoton(data);
-})
+  fetch('./js/data.json')
+  .then(res=> res.json())
+  .then(data=>{
+    crearProducto(data);
+    agregarFuncionAlBoton(data);
+  })
 }
 
 productos()
+finalizarCompra()

@@ -14,26 +14,106 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+
   <!-- HEADER -->
+
   <header class="header">
     <div class="header__content">
       <h1 class="header__content-title"><a href="#">BMX Shop</a></h1>
     </div>
   </header>
+
 <!-- MAIN -->
+
   <main class="main">
     <section class="main__content"></section>
   </main>
+
 <!-- CARRITO DE COMPRAS -->
+
   <aside class="aside">
-    <h2 class="aside__title"><i class="bi bi-cart2"> </i>Carrito de compras</h2>
+    <h2 class="aside__title"><i class="bi bi-cart2"></i>Carrito de compras</h2>
     <div class="carrito"></div>
     <div class="aside__comprar">
       <h2>Total: $<span id="carritoPrecioTotal">0</span></h2>
       <button class="aside__comprar-btn">Comprar</button>
     </div>
   </aside>
+
+<!-- Formulario de pago -->
+
+<section id='form'>
+  <div class="form__pago">
+    <h2 class="form__pago-title">Por favor, completa los siguientes datos para proceder con la compra</h2>
+    <form class="form__pago-form">    
+
+      <!-- Nombre del titular de la tarjeta -->
+
+      <div class='tarjeta'>
+        <label for="tarjeta__nombre">Titular de la tarjeta</label>
+        <input class='input' type="text" id='tarjeta__nombre' placeholder='Ej. Maku Gianelli'  required>
+      </div>
+
+      <!-- Mail del titular de la tarjeta -->
+
+      <div class="tarjeta">
+        <label for="tarjeta__mail">Mail de contacto</label>
+        <input class='input' type="text" id='tarjeta__mail' placeholder='Ej. random123@mail.com'   required>
+      </div>
+
+      <!-- Numero de la tarjeta -->
+
+      <div class='tarjeta'>
+        <label for="tarjeta__numero">Numero de la tarjeta</label>
+        <input class='input' type="text" id='tarjeta__numero' maxlength='19' placeholder='Ej. 1234 1234 1234 1234'  required> 
+      </div>
+
+      <!-- VTO -->
+
+      <div class='tarjeta'>  
+        <div>
+          <p>Vencimiento:</p>
+          <select id="month" required>
+            <option value="">Enero</option>
+            <option value="">Febrero</option>
+            <option value="">Marzo</option>
+            <option value="">Abril</option>
+            <option value="">Mayo</option>
+            <option value="">Junio</option>
+            <option value="">Julio</option>
+            <option value="">Agosto</option>
+            <option value="">Septiembre</option>
+            <option value="">Octubre</option>
+            <option value="">Noviembre</option>
+            <option value="">Diciembre</option>
+          </select>
+          <select id="age" required >
+            <option value="">2022</option>
+            <option value="">2023</option>
+            <option value="">2024</option>
+            <option value="">2025</option>
+            <option value="">2026</option>
+            <option value="">2027</option>
+            <option value="">2028</option>
+            <option value="">2029</option>
+            <option value="">2030</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- CVV -->
+
+      <div class='tarjeta'>
+        <label for="tarjeta__cvv">CVV</label>
+        <input class='input' type="text" id='tarjeta__cvv' maxlength='3' placeholder='Ej. 123'   required>
+      </div>
+    </form>
+    <button type='button' id='btn__realizarCompra'>Realizar compra</button>
+  </div>
+</section>  
+
 <!-- FOOTER -->
+
   <footer class="footer">
     <div class="footer__info">
       <p>Nuestro correo: bmxshop@mail.com</p>
@@ -42,7 +122,9 @@
       <p><small>© 2022 Todos los derechos reservados.</small></p>
     </div>
   </footer>
+
 <!-- JAVASCRIPT -->
+
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./js/main.js"></script>
 </body>

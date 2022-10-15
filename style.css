@@ -62,6 +62,7 @@ body {
   border-radius: 5px;
   transition: all 0.2s;
 }
+
 .header__content-navbar li a{
   font-weight: bold;
 }
@@ -73,8 +74,6 @@ body {
   padding: 3px;
   color: white;
 }
-
-
 
 /* MAIN */
 
@@ -97,7 +96,7 @@ body {
   width: 100%;
   height: 100%;
   }
-  
+
 /* PRODUCTOS */
 
 .productos {
@@ -113,6 +112,7 @@ body {
   border-radius: 5px;
   transition: all .2s;
 }
+
 .productos:hover {
   background-color: rgb(177, 74, 74);
   color: white;
@@ -125,9 +125,11 @@ body {
   padding: 5px;
   align-self: center;
 }
+
 .productos__title{
   margin: 5px;
 }
+
 .productos__desc{
   margin: 5px;
   display: -webkit-box;
@@ -141,6 +143,7 @@ body {
   margin: 5px;
   font-weight: bold;
 }
+
 .productos__comprar{
   background-color: #ccc;
   margin: 5px;
@@ -228,11 +231,76 @@ body {
   font-weight: bold;
   transition: all 0.2s;
 }
+
 .carrito__producto-btn:hover{
   background-color:rgb(177, 74, 74);
   color: #ddd;
 }
 
+/* FORMULARIO DE PAGO */
+
+.form__pago {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 40%;
+  top: 20%;
+  background-color: #ccc;
+  padding: 15px;
+  width: 400px;
+  height: 600px;
+  border-radius: 15px;
+  border: 3px solid black;
+}
+
+.form__pago-title {
+  text-align: center;
+}
+
+.form__pago-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  height: 300px;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 200px;
+  font-weight: bold;
+}
+
+#btn__realizarCompra {
+  width: 160px;
+  background-color: #555;
+  color: white;
+  align-self: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 7px;
+}
+
+#btn__realizarCompra:hover {
+  background-color:rgb(67, 194, 28)
+
+}
+
+.input {
+  margin-top: 5px;
+  padding: 3px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
 /* FOOTER */
 
 .footer {
